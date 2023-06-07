@@ -34,6 +34,9 @@ INSTALLED_APPS = [
     #my apps
     'meal_plans',
 
+    #third party
+    'bootstrap_datepicker_plus',
+
     #Default apps
     'django.contrib.admin',
     'django.contrib.auth',
