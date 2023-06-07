@@ -1,0 +1,6 @@
+
+
+<form action="{% url 'meal_plans:new_plan'%}" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+</form>
