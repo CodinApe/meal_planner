@@ -1,5 +1,9 @@
 {% extends "meal_plans/base.html" %}
 
+<head>
+    
+</head>
+
 {% block content %}
 
 <h1>Plans for the week!</h1>
@@ -8,11 +12,14 @@
     {% for plan in plans %}
     <li>
         <a href="{% url 'meal_plans:plan' plan.id %}">{{ plan }}</a>
+        <a href="">{{ plan.day_of_week }}</a>
     </li>
     {% empty %}
         <li>No plans yet for this week!</li>
     {% endfor %}
 </ul>
+
+<a href="{% url 'meal_plans:new_plan' %}">Add plan</a>
 
 
 {% endblock content %}

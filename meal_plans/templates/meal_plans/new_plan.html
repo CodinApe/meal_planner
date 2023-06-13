@@ -1,6 +1,14 @@
+{% extends "meal_plans/base.html"%}
+{% load django_bootstrap5 %}
 
 
+
+{% block content %}
+{{ form.media }}
 <form action="{% url 'meal_plans:new_plan'%}" method="post">
     {% csrf_token %}
-    {{ form.as_p }}
+    {% bootstrap_form form %}
+    <button name="submit">Add plan</button>
 </form>
+
+{% endblock content %}

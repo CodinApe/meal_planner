@@ -1,4 +1,6 @@
 from django.shortcuts import render, redirect
+import calendar
+import datetime
 
 from .models import Plan
 
@@ -25,15 +27,16 @@ def plan(request, plan_id):
 
 def new_plan(request):
     """Add a new plan for acertain day"""
-    if request != 'POST':
+    if request.method != 'POST':
         # no data submitted; create blank form
         form = NewPlan()
     else:
         # POST data submitted; process the data.
         form = NewPlan(data=request.POST)
         if form.is_valid():
-            form.save()
-            return redirect('meal_plams:index')
+            new_plan = form.save(commit=False)
+            new_plan.save()
+            return redirect('meal_plans:plans')
     context = {'form': form}
     return render(request, 'meal_plans/new_plan.html', context)
 

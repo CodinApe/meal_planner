@@ -1,3 +1,12 @@
+{% load django_bootstrap5 %}
+
+<head>
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    
+</head>
+
 <p>
     <a href="{% url 'meal_plans:index' %}">Meal Planner</a> -
     <a href="{% url 'meal_plans:plans' %}">Plans</a>
