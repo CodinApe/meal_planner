@@ -10,10 +10,16 @@
 
 <ul>
     {% for plan in plans %}
+    {% if plan.day_of_week == plan.current_day %}
+        <li>
+            <h3><a href="{% url 'meal_plans:plan' plan.id %}">{{ plan.current_day }}</a></h3>
+        </li>
+    {% endif %}
     <li>
         <a href="{% url 'meal_plans:plan' plan.id %}">{{ plan }}</a>
-        <a href="">{{ plan.day_of_week }}</a>
+        {{ plan.day_of_week }}
     </li>
+
     {% empty %}
         <li>No plans yet for this week!</li>
     {% endfor %}

@@ -1,4 +1,6 @@
+from typing import Iterable, Optional
 from django.db import models
+from django.core.exceptions import ValidationError
 import datetime
 
 # Create your models here.
@@ -6,14 +8,27 @@ import datetime
 class Plan(models.Model):
     """create a plan for a certain day"""
     date = models.DateField()
-    #current = str(date)
-    #dayofweek = date(current).strftime('%A')
-    #current = datetime().date()
-    #dayofweek = current.strftime('%A')
-    breakfast = models.TextField(default="")
+    """breakfast = models.TextField(default="") # original functionality before adding FoodItem class.
     lunch = models.TextField(default="")
     dinner = models.TextField(default="")
-    snacks = models.TextField(default="")
+    snacks = models.TextField(default="")"""
+
+    current_date = datetime.date.today()
+    the_day = current_date.weekday()
+    week_days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
+    current_day = week_days[the_day]
+
+    def clean(self): 
+        """Performs validation to data and inputs automatically, but this adds a 
+        new validation for when a date is already used for a plan."""
+        previous_date = Plan.objects.filter(date = self.date) 
+        previous_date.exclude(pk=self.pk)
+        if previous_date.exists():
+            raise ValidationError("You have a plan for this day already. Try updating your plan.")
+    
+    def save(self):
+        self.clean()
+        super().save()
 
     @property
     def day_of_week(self):
@@ -21,7 +36,18 @@ class Plan(models.Model):
 
     def __str__(self):
         return str(self.date)
-    
+
+class FoodItem(models.Model):
+    """create foo item with fat, protein, and carb content"""
+    item = models.TextField(blank=True)
+    fat = models.PositiveIntegerField(null=True, blank=True)
+    protein = models.PositiveIntegerField(null=True, blank=True)
+    carbohydrates = models.PositiveIntegerField(null=True, blank=True) 
+
+    plan = models.ManyToManyField(Plan)
+
+    def __str__(self):
+        return self.item    
     
     
 

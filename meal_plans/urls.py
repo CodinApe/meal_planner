@@ -14,4 +14,6 @@ urlpatterns = [
     path('plans/<int:plan_id>/', views.plan, name = 'plan'),
 
     path('new_plan/', views.new_plan, name='new_plan'),
+
+    path('edit_plan/', views.edit_plan, name='edit_plan'),
 ]

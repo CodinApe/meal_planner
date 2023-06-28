@@ -4,12 +4,12 @@
 
 <h1>Plan for: {{ plan }}</h1>
 
+{% for fooditem in fooditems %}
+<ul>
+    <li>{{ fooditem }}</li>
+</ul>
+     
+{% endfor %}
 
-
-<p>{{  plan.breakfast|linebreaks  }}</p>
-<p>{{ plan.lunch }}</p>
-<p>{{ plan.dinner }}</p>
-<p>{{ plan.snacks }}</p>
-    
 {% endblock content %}
 
