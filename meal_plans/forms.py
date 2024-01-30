@@ -1,7 +1,7 @@
 from django import forms
 from django.forms import formset_factory
 
-from bootstrap_datepicker_plus.widgets import DatePickerInput
+# from bootstrap_datepicker_plus.widgets import DatePickerInput
 
 from .models import Plan, FoodItem
 
@@ -15,7 +15,10 @@ class NewPlan(forms.ModelForm):
     class Meta:
         model = Plan
         fields = ['date']
-        widgets = {'date': DatePickerInput()}
+        widgets = {
+            'date': forms.DateInput(attrs={'class': 'datepicker'}),
+        }
+        # {'date': DatePickerInput()}
         
 
         

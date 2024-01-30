@@ -5,9 +5,14 @@
 
 {% block content %}
 {{ form.media }}
+<script>
+    $(function() {
+        $(".datepicker").datepicker();
+    });
+</script>
 <form action="{% url 'meal_plans:new_plan'%}" method="post">
     {% csrf_token %}
-    {% bootstrap_form form %}
+    {{ form.as_p }}
     {{ formset.management_form }}
     {% for food_form in formset %}
         {{ food_form.as_table }}

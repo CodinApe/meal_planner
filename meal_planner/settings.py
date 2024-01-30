@@ -36,8 +36,8 @@ INSTALLED_APPS = [
 
     #third party apps
     'django_bootstrap5',
-    'bootstrap_datepicker_plus',
-    'jquery',
+    # 'bootstrap_datepicker_plus',
+    # 'jquery',
 
     #Default apps
     'django.contrib.admin',
