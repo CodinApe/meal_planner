@@ -6,10 +6,12 @@
 {% block content %}
 {{ form.media }}
 <script>
+    {% comment %} move tojs file- utilizes jQuery datepicker for anything with datepicker class {% endcomment %}
     $(function() {
         $(".datepicker").datepicker();
     });
 </script>
+
 <form action="{% url 'meal_plans:new_plan'%}" method="post">
     {% csrf_token %}
     {{ form.as_p }}

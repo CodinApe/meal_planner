@@ -15,6 +15,7 @@ class NewPlan(forms.ModelForm):
     class Meta:
         model = Plan
         fields = ['date']
+        # Sets a widget with class of datepicker to utilize jquery datepicker 
         widgets = {
             'date': forms.DateInput(attrs={'class': 'datepicker'}),
         }
