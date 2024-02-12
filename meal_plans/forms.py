@@ -20,6 +20,10 @@ class NewPlan(forms.ModelForm):
             'date': forms.DateInput(attrs={'class': 'datepicker'}),
         }
         # {'date': DatePickerInput()}
+
+# Form to take a user input food item to scan the sqlite database and api call in views.py
+class SearchFoods(forms.Form):
+    foodItem = forms.CharField(label="Search food items", max_length=80)
         
 
         

@@ -15,5 +15,7 @@ urlpatterns = [
 
     path('new_plan/', views.new_plan, name='new_plan'),
 
+    path('add_food_form/', views.add_food_form, name='add_food_form'),
+
     path('edit_plan/', views.edit_plan, name='edit_plan'),
 ]

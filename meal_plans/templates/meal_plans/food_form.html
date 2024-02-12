@@ -1,0 +1,8 @@
+
+<form action="{% url 'meal_plans:add_food_form'%}" method="post" id="foodItemForm">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button id="submitFoodItemBtn" type="button">Add Food Item</button>
+    <input type="hidden" id="foodItemFormSubmitted" name="food_item_form_submitted" value="1">
+</form>
+

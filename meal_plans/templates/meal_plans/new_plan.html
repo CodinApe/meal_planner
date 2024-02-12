@@ -5,21 +5,80 @@
 
 {% block content %}
 {{ form.media }}
+
+<div id="foodItemTemplate" style="display: none;">
+    {{ formset.empty_form.as_table }}
+</div>
+
+<form action="{% url 'meal_plans:new_plan'%}" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <select name="food_item" multiple>
+        <option value="">Select a food item</option>
+        {% for food_item in food_items %}
+            <option value="{{ food_item.id }}">{{ food_item.item }}</option>
+        {% endfor %}
+    </select>
+    {{ formset.management_form }}
+    <div id="foodItemContainer">
+    {% for food_form in formset %}
+        {{ food_form.as_table }}
+    {% endfor %} 
+    </div>
+    <button type="button" id="addItem">Add More Food Items</button>
+    <button name="submit">Add plan</button>
+</form>
+
 <script>
     {% comment %} move tojs file- utilizes jQuery datepicker for anything with datepicker class {% endcomment %}
     $(function() {
         $(".datepicker").datepicker();
     });
-</script>
 
-<form action="{% url 'meal_plans:new_plan'%}" method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    {{ formset.management_form }}
-    {% for food_form in formset %}
-        {{ food_form.as_table }}
-    {% endfor %}
-    <button name="submit">Add plan</button>
-</form>
+    
+    document.addEventListener('DOMContentLoaded', function() {
+        document.getElementById("addItem").addEventListener("click", function () {
+            // Sets the template of food form
+            let templateForm = document.getElementById("foodItemTemplate").innerHTML;
+    
+            // Food form container
+            let newFoodFormDiv = document.createElement("div");
+    
+            // Add the template to div
+            newFoodFormDiv.innerHTML = templateForm;
+
+            // variable to hold id of current form being added as well as length of formset
+            newFormCount = 1;
+
+            // Grab each element of the form to alter attributes
+            newFoodFormDiv.querySelectorAll("input, textarea, label").forEach(function (element) {
+                // Replace '__prefix__' with the new form count in id, for, and name attributes
+                ["id", "for", "name"].forEach(function (attribute) {
+                    if (element.getAttribute(attribute)) {
+                        element.setAttribute(attribute, element.getAttribute(attribute).replace("__prefix__", newFormCount));
+                    }
+                });
+            });
+
+            newFormCount++;
+    
+            // Append newFoodFormDiv to the formset container
+            document.getElementById("foodItemContainer").appendChild(newFoodFormDiv);
+    
+            // Update the form count for the formset
+            updateFormsetFormCount();
+        });
+    
+        // Function to update the form count for the formset
+        function updateFormsetFormCount() {
+            let totalFormsInput = document.getElementById("id_food_items-TOTAL_FORMS");
+            //let formCount = document.querySelectorAll(".food-item-form").length;
+            // sets the value to newFormCount
+            totalFormsInput.value = newFormCount;
+        }
+
+    });
+
+</script>
 
 {% endblock content %}

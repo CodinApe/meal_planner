@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.forms import formset_factory
+from django.http import HttpResponse, JsonResponse
 import calendar
 import datetime
 
@@ -10,7 +11,7 @@ from .forms import NewPlan, NewFoodItem
 # Create your views here.
 
 def index(request):
-    """Home apge for meal planner]"""
+    """Home page for meal planner"""
     return render(request, 'meal_plans/index.html')
 
 def plans(request):
@@ -28,7 +29,9 @@ def plan(request, plan_id):
 
 def new_plan(request):
     """Add a new plan for acertain day"""
-    FooditemFormset = formset_factory(NewFoodItem, extra=4)
+    FooditemFormset = formset_factory(NewFoodItem, extra=1)
+    food_items = FoodItem.objects.all()
+
 
     if request.method != 'POST':
         # no data submitted; create blank form
@@ -42,7 +45,14 @@ def new_plan(request):
 
         if form.is_valid():
             plan = form.save()
+            # Handles grabbign the selcted food from the dropdown of food_items
+            food_item_ids = request.POST.getlist('food_item')
+            if food_item_ids:
+                for food_id in food_item_ids:
+                    foodItem = FoodItem.objects.get(id = food_id)
+                    plan.fooditem_set.add(foodItem)
 
+            # Handles the forms for new food items saved to database and plan
             if formset.is_valid():
                 for food_form in formset:
                     food_item = food_form.save(commit=False)
@@ -51,8 +61,15 @@ def new_plan(request):
 
             return redirect('meal_plans:plans')
         
-    context = {'form': form, 'formset': formset}
+    context = {'form': form, 'formset': formset, 'food_items':food_items}
     return render(request, 'meal_plans/new_plan.html', context)
+
+def add_food_form(request):
+    """Grabs the html content fomr food_form.html and returns a json response of it to be added to new_plan"""
+    form = NewFoodItem()
+    html = render(request, 'meal_plans/food_form.html', {'form': form}).content.decode('utf-8')
+    return HttpResponse(html, content_type='text/plain; charset=utf-8')
+
 
 def edit_plan(request, plan_id):
     """Edit an existing plan"""
@@ -74,3 +91,4 @@ def delete_plan(request, plan_id):
     
 
     
+#  CHECK chatgpt for ideas on how to incorpoartae fatsecret
