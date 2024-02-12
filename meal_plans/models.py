@@ -18,6 +18,9 @@ class Plan(models.Model):
     week_days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
     current_day = week_days[the_day]
 
+    # allows user to delete item based on boolean
+    delete_plan = False
+
     def clean(self): 
         """Performs validation to data and inputs automatically, but this adds a 
         new validation for when a date is already used for a plan."""

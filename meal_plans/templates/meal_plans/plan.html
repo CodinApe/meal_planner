@@ -11,5 +11,7 @@
      
 {% endfor %}
 
+<p><a href="{% url 'meal_plans:delete_plan' plan.id%}">Delete plan</a></p>
+
 {% endblock content %}
 

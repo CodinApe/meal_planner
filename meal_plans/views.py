@@ -88,7 +88,14 @@ def edit_plan(request, plan_id):
 
 def delete_plan(request, plan_id):
     """delete an existing plan and its contents"""
-    
+    plan = Plan.objects.get(id=plan_id)
+    if request.method == 'POST':
+        plan.delete()
+        return redirect('meal_plans:plans')
+
+    context = {'plan': plan}
+
+    return render(request, 'meal_plans/delete_plan.html', context)
 
     
 #  CHECK chatgpt for ideas on how to incorpoartae fatsecret

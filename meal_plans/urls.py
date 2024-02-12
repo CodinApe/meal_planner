@@ -18,4 +18,6 @@ urlpatterns = [
     path('add_food_form/', views.add_food_form, name='add_food_form'),
 
     path('edit_plan/', views.edit_plan, name='edit_plan'),
+
+    path('delete_plan/<int:plan_id>/', views.delete_plan, name='delete_plan'),
 ]
