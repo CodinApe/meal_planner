@@ -1,0 +1,55 @@
+body {
+    background-color: blue;
+    margin: 0 auto;
+    text-align: center;
+    justify-content: center;
+}
+
+h4 a {
+    font-size: 20px;
+}
+
+h4 a, p a {
+    color: black;
+    text-decoration: none;
+}
+
+
+a:visited {
+    color: black;
+}
+
+#plansSection {
+    margin: 0 auto;
+    text-align: center;
+    justify-content: center;
+}
+
+#todayPlan {
+    /* position: absolute;
+    top: 500px; */
+}
+
+#plansList {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-evenly;
+    padding-left: 0;
+    /* flex */
+}
+
+.planLi {
+    background-color: rgb(209, 201, 201);
+    /* margin: 0 auto;
+    border: 2px solid black; */
+
+}
+
+/* plan.html specific */
+
+#foodItems {
+    display: flex;
+    width: 50%;
+    flex-direction: row;
+}

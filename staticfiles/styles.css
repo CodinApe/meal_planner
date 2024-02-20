@@ -1,0 +1,9 @@
+body {
+    background-color: blue;
+}
+
+#plansList {
+    margin: 0 auto;
+    text-align: center;
+    justify-content: center;
+}

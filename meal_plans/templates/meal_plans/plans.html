@@ -1,31 +1,41 @@
 {% extends "meal_plans/base.html" %}
-
-<head>
-    
-</head>
+{% load static %}
 
 {% block content %}
-
-<h1>Plans for the week!</h1>
-
-<ul>
+<section id="plansSection">
+    <h2>plans for the week!</h2>
     {% for plan in plans %}
-    {% if plan.day_of_week == plan.current_day %}
-        <li>
-            <h3><a href="{% url 'meal_plans:plan' plan.id %}">{{ plan.current_day }}</a></h3>
+    {% if today == plan.date %}
+        <p id="todayPlan" class= "row">
+            <div class="planLi">
+                <a href="{% url 'meal_plans:plan' plan.id %}"><h3>Today: {{ plan.day_of_week }}</h3>
+                    <p>{{ today }} </p></a>
+            </div>
+        </p>
+    {% endif %}
+    {% endfor %}
+    <ul id="plansList" class="">
+    {% for plan in plans %}
+    {% if today != plan.date %}
+        <li class= "row">
+            <div class="planLi shadow p-3 mb-5 rounded">
+                <a href="{% url 'meal_plans:plan' plan.id %}">
+                <h4 >{{ plan }}</h4>
+                <p>{{ plan.day_of_week }} </p></a>
+                
+                <p><a href="{% url 'meal_plans:delete_plan' plan.id %}">delete plan</a></p>
+            </div>
         </li>
     {% endif %}
-    <li>
-        <a href="{% url 'meal_plans:plan' plan.id %}">{{ plan }}</a>
-        {{ plan.day_of_week }}
-    </li>
 
     {% empty %}
         <li>No plans yet for this week!</li>
     {% endfor %}
-</ul>
+    </ul>   
 
-<a href="{% url 'meal_plans:new_plan' %}">Add plan</a>
+    <a href="{% url 'meal_plans:new_plan' %}">Add plan</a>
+</section>
+
 
 
 {% endblock content %}

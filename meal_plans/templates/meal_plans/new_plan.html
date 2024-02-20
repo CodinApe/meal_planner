@@ -1,7 +1,5 @@
 {% extends "meal_plans/base.html"%}
-{% load django_bootstrap5 %}
-
-
+{% load bootstrap5 %}
 
 {% block content %}
 {{ form.media }}
@@ -13,26 +11,44 @@
 <form action="{% url 'meal_plans:new_plan'%}" method="post">
     {% csrf_token %}
     {{ form.as_p }}
-    <select name="food_item" multiple>
-        <option value="">Select a food item</option>
+    <p>Select a food item</p>
+    <input id="myInput" type="text" placeholder="Search..">
+    <input id = "submitCheck" type="button">Search</input>
+    <select id="select" name="food_item" class="foodSelectSec" multiple>
         {% for food_item in food_items %}
             <option value="{{ food_item.id }}">{{ food_item.item }}</option>
         {% endfor %}
     </select>
     {{ formset.management_form }}
-    <div id="foodItemContainer">
+    <div id="foodItemContainer" class = "form-group">
     {% for food_form in formset %}
         {{ food_form.as_table }}
     {% endfor %} 
     </div>
     <button type="button" id="addItem">Add More Food Items</button>
-    <button name="submit">Add plan</button>
+    <button name="submit" class="btn btn-primary">Add plan</button>
 </form>
+
+<div id ="output">
+</div>
+
+<div id = "container" >
+    {% for food_item in food_items %}
+        <p class="items">{{ food_item }}</p>
+    {% endfor %}
+</div>
+
 
 <script>
     {% comment %} move tojs file- utilizes jQuery datepicker for anything with datepicker class {% endcomment %}
     $(function() {
         $(".datepicker").datepicker();
+    });
+
+    {% comment %} Adds select2 js function to select allowing selection of multiple items {% endcomment %}
+
+    $(document).ready(function() {
+        $(".foodSelectSec").select2();
     });
 
     
@@ -48,7 +64,7 @@
             newFoodFormDiv.innerHTML = templateForm;
 
             // variable to hold id of current form being added as well as length of formset
-            newFormCount = 1;
+            newFormCount = 0;
 
             // Grab each element of the form to alter attributes
             newFoodFormDiv.querySelectorAll("input, textarea, label").forEach(function (element) {
@@ -72,13 +88,38 @@
         // Function to update the form count for the formset
         function updateFormsetFormCount() {
             let totalFormsInput = document.getElementById("id_food_items-TOTAL_FORMS");
-            //let formCount = document.querySelectorAll(".food-item-form").length;
+
             // sets the value to newFormCount
             totalFormsInput.value = newFormCount;
         }
 
-    });
+        // Search through foods - 
+        let output = document.getElementById("output");
+        let items = document.getElementsByClassName("items");
+        document.getElementById("myInput").addEventListener("keyup", function(){
+            let searchItem = document.getElementById("myInput").value;
+
+            for (let item of items) {
+                let food = item.textContent;
+                for (let i = 0; i < searchItem.length; i++){
+                    if (searchItem[i] == food[i]) {
+                        item.style.display = "block";
+                    }
+                    else {
+                        item.style.display = "none";
+                        break;
+                    };
+                };
+                };
+             
+            });
+        });
+
+
 
 </script>
 
 {% endblock content %}
+
+<!-- Check chatgpton last idea- changed select elemtn to div with inputs, give the inputs all the same name, then grab them in views by specifying the name given to them all -->
+

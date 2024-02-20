@@ -10,6 +10,9 @@ class NewFoodItem(forms.ModelForm):
     class Meta:
         model = FoodItem
         fields = ['item', 'fat', 'carbohydrates', 'protein']
+        widgets = {
+            'item' : forms.TextInput(attrs={'class' : 'form-control'}),
+        }
 
 class NewPlan(forms.ModelForm):
     class Meta:

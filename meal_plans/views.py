@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.forms import formset_factory
 from django.http import HttpResponse, JsonResponse
+from datetime import date
 import calendar
 import datetime
 
@@ -17,7 +18,9 @@ def index(request):
 def plans(request):
     """Show all the plans"""
     plans = Plan.objects.order_by('date')
-    context = {'plans': plans}
+    today = date.today()
+
+    context = {'plans': plans, 'today':today}
     return render(request, 'meal_plans/plans.html', context)
 
 def plan(request, plan_id):
@@ -29,7 +32,7 @@ def plan(request, plan_id):
 
 def new_plan(request):
     """Add a new plan for acertain day"""
-    FooditemFormset = formset_factory(NewFoodItem, extra=1)
+    FooditemFormset = formset_factory(NewFoodItem, extra=0)
     food_items = FoodItem.objects.all()
 
 
@@ -98,4 +101,3 @@ def delete_plan(request, plan_id):
     return render(request, 'meal_plans/delete_plan.html', context)
 
     
-#  CHECK chatgpt for ideas on how to incorpoartae fatsecret
