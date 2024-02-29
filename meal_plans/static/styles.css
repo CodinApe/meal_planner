@@ -9,7 +9,7 @@ h4 a {
     font-size: 20px;
 }
 
-h4 a, p a {
+h4 a, p a, div a {
     color: black;
     text-decoration: none;
 }
@@ -19,6 +19,10 @@ a:visited {
     color: black;
 }
 
+.h3Plans {
+    text-align: left;
+}
+
 #plansSection {
     margin: 0 auto;
     text-align: center;
@@ -26,24 +30,60 @@ a:visited {
 }
 
 #todayPlan {
-    /* position: absolute;
-    top: 500px; */
+    width: 25%;
+    margin: 0 auto;
+
 }
 
-#plansList {
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
-    justify-content: space-evenly;
+.weekPlans {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr;
+    /* justify-content:left; */
     padding-left: 0;
-    /* flex */
+}
+
+.weekPlans li {
+    margin: 5px;
+}
+
+.planSunday {
+    grid-column: 1/2;
+    grid-row: 1/2;
+}
+
+.planMonday {
+    grid-column: 2/3;
+    grid-row: 1/2;
+}
+
+.planTuesday {
+    grid-column: 3/4;
+    grid-row: 1/2;
+}
+
+.planWednesday {
+    grid-column: 4/5;
+    grid-row: 1/2;
+}
+
+.planThursday {
+    grid-column: 5/6;
+    grid-row: 1/2;
+}
+
+.planFriday {
+    grid-column: 6/7;
+    grid-row: 1/2;
+}
+
+.planSaturday {
+    grid-column: 7/8;
+    grid-row: 1/2;
 }
 
 .planLi {
     background-color: rgb(209, 201, 201);
-    /* margin: 0 auto;
-    border: 2px solid black; */
-
 }
 
 /* plan.html specific */
@@ -52,4 +92,10 @@ a:visited {
     display: flex;
     width: 50%;
     flex-direction: row;
+}
+
+/* new_plan  */
+
+#container .items {
+    display: none;
 }

@@ -3,21 +3,21 @@
 
 {% block content %}
 <section id="plansSection">
-    <h2>plans for the week!</h2>
-    {% for plan in plans %}
+    <h2>Your Meal Plans!</h2>
+    {% for plan in weekOne %}
     {% if today == plan.date %}
-        <p id="todayPlan" class= "row">
-            <div class="planLi">
-                <a href="{% url 'meal_plans:plan' plan.id %}"><h3>Today: {{ plan.day_of_week }}</h3>
-                    <p>{{ today }} </p></a>
-            </div>
-        </p>
+        <div class="" id="todayPlan">
+            <a href="{% url 'meal_plans:plan' plan.id %}"><h3>Today: </h3>
+                <p>{{ plan.day_of_week }}</p>
+                <p>{{ today }} </p></a>
+        </div>
     {% endif %}
     {% endfor %}
-    <ul id="plansList" class="">
-    {% for plan in plans %}
-    {% if today != plan.date %}
-        <li class= "row">
+
+    <h3 class="h3Plans">Current week</h3>
+    <ul id="weekOnePlans" class="weekPlans">
+    {% for plan in weekOne %}
+        <li class= "plan{{ plan.day_of_week }}">
             <div class="planLi shadow p-3 mb-5 rounded">
                 <a href="{% url 'meal_plans:plan' plan.id %}">
                 <h4 >{{ plan }}</h4>
@@ -26,7 +26,28 @@
                 <p><a href="{% url 'meal_plans:delete_plan' plan.id %}">delete plan</a></p>
             </div>
         </li>
-    {% endif %}
+    {% empty %}
+        <li>No plans yet for this week!</li>
+    {% endfor %}
+    </ul>
+
+    <h3 class="h3Plans">Next Week</h3>
+    <ul>
+        <li>Sunday</li>
+        <li>Monday</li>
+    </ul>
+
+    <ul id="weekTwoPlans" class="weekPlans">
+    {% for plan in weekTwo %}
+        <li class= "plan{{ plan.day_of_week }}">
+            <div class="planLi shadow p-3 mb-5 rounded">
+                <a href="{% url 'meal_plans:plan' plan.id %}">
+                <h4 >{{ plan }}</h4>
+                <p>{{ plan.day_of_week }} </p></a>
+                
+                <p><a href="{% url 'meal_plans:delete_plan' plan.id %}">delete plan</a></p>
+            </div>
+        </li>
 
     {% empty %}
         <li>No plans yet for this week!</li>
@@ -34,8 +55,51 @@
     </ul>   
 
     <a href="{% url 'meal_plans:new_plan' %}">Add plan</a>
+
+    <input type="text" id="datepicker">
+
+    <script>
+        $(document).ready( function() {
+        $( "#datepicker" ).datepicker({
+            onSelect: function(date) {
+                // Redirect to plans for the selected date
+                window.location.href = "{% url 'meal_plans:plans_for_date' %}?date=" + date;
+            }
+        });
+
+    });
+    </script>
 </section>
 
+<section>
+    <!-- <div class="calendar-container">
+    <header class="calendar-header">
+        <p class="calendar-current-date"></p>
+        <div class="calendar-navigation">
+            <span id="calendar-prev"
+                  class="material-symbols-rounded">
+                chevron_left
+            </span>
+            <span id="calendar-next"
+                  class="material-symbols-rounded">
+                chevron_right
+            </span>
+        </div>
+    </header> -->
 
+    <!-- <div class="calendarContainer">
+        <ul class="daysOfTheWeek">
+            <li>Sun</li>
+            <li>Mon</li>
+            <li>Tue</li>
+            <li>Wed</li>
+            <li>Thu</li>
+            <li>Fri</li>
+            <li>Sat</li>
+        </ul>
+        <ul id="calenderList"></ul>
+    </div> -->
+
+</section>
 
 {% endblock content %}

@@ -20,4 +20,6 @@ urlpatterns = [
     path('edit_plan/', views.edit_plan, name='edit_plan'),
 
     path('delete_plan/<int:plan_id>/', views.delete_plan, name='delete_plan'),
+
+    path('plans_for_date', views.plans_for_date, name='plans_for_date'),
 ]

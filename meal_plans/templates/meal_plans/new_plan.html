@@ -1,5 +1,6 @@
 {% extends "meal_plans/base.html"%}
 {% load bootstrap5 %}
+{% load static %}
 
 {% block content %}
 {{ form.media }}
@@ -38,7 +39,11 @@
     {% endfor %}
 </div>
 
-
+<style>
+    #container .items {
+    display: none;
+}
+</style>
 <script>
     {% comment %} move tojs file- utilizes jQuery datepicker for anything with datepicker class {% endcomment %}
     $(function() {
@@ -102,6 +107,9 @@
             for (let item of items) {
                 let food = item.textContent;
                 for (let i = 0; i < searchItem.length; i++){
+                    if (searchItem == " " ){
+                        item.style.display = "none";
+                    }
                     if (searchItem[i] == food[i]) {
                         item.style.display = "block";
                     }
@@ -112,10 +120,17 @@
                 };
                 };
              
-            });
         });
+        document.addEventListener("click", function(){
+            let searchItem = document.getElementById("myInput");
 
-
+            if (searchItem && event.target != searchItem) {
+                for (let item of items) {
+                    item.style.display = "none";
+                }
+            };
+        });
+    });
 
 </script>
 

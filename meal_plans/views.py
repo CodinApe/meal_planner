@@ -1,9 +1,8 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.forms import formset_factory
 from django.http import HttpResponse, JsonResponse
-from datetime import date
 import calendar
-import datetime
+from datetime import datetime, date, timedelta
 
 from .models import Plan, FoodItem
 
@@ -19,8 +18,19 @@ def plans(request):
     """Show all the plans"""
     plans = Plan.objects.order_by('date')
     today = date.today()
+    todaysDate = datetime.now().date()
 
-    context = {'plans': plans, 'today':today}
+    week1Start = todaysDate - timedelta(days=todaysDate.weekday() + 1)
+    week1End = week1Start + timedelta(days=6)
+    week2Start = week1End + timedelta(days=1)
+    week2End = week2Start + timedelta(days=6)
+
+    weekOne = Plan.objects.filter(date__range = [week1Start, week1End])
+    weekTwo = Plan.objects.filter(date__range = [week2Start, week2End])
+
+    
+
+    context = {'plans': plans, 'today':today, 'weekOne':weekOne, 'weekTwo': weekTwo}
     return render(request, 'meal_plans/plans.html', context)
 
 def plan(request, plan_id):
@@ -29,6 +39,14 @@ def plan(request, plan_id):
     fooditems = plan.fooditem_set.all().order_by('id')
     context = {'plan': plan, 'fooditems': fooditems}
     return render(request, 'meal_plans/plan.html', context)
+
+# CHATGPT SOLUTION FOR displaying jQuery datepicker and loading plan for day selected
+def plans_for_date(request):
+    if request.method == 'GET':
+        selectedDate = request.GET.get('date')
+        formattedDate = datetime.strptime(selectedDate, "%m/%d/%Y").strftime("%Y-%m-%d")
+        item = get_object_or_404(Plan, date = formattedDate)
+    return render(request, 'meal_plans/plans_template.html', {'item':item})
 
 def new_plan(request):
     """Add a new plan for acertain day"""
