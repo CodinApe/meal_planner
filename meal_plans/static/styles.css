@@ -1,12 +1,15 @@
-body {
-    background-color: blue;
+html {
+    background-color: #F5DEB3;
+}
+#body {
+    background-color: #F5DEB3;
     margin: 0 auto;
     text-align: center;
     justify-content: center;
 }
 
-h4 a {
-    font-size: 20px;
+.nav {
+    background-color: #f58608a4;
 }
 
 h4 a, p a, div a {
@@ -19,23 +22,46 @@ a:visited {
     color: black;
 }
 
+ul {
+    
+}
+
+li {
+    list-style-type: none;
+}
+
+/* plans.html */
+
 .h3Plans {
     text-align: left;
+}
+
+#weekOnePlans {
+    list-style: none;
 }
 
 #plansSection {
     margin: 0 auto;
     text-align: center;
     justify-content: center;
+    background-color: #F5DEB3;
+    max-width: 1300px;
 }
 
 #todayPlan {
-    width: 25%;
-    margin: 0 auto;
-
+    /* background-color: rgb(245, 162, 162); */
+    background-color: #7CB342;
 }
 
-.weekPlans {
+#todayPlan:hover {
+    background-color: #f8e8e8;
+}
+
+#todayLi {
+    
+}
+
+.weekPlans, .daysOfTheWeek {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
     grid-template-rows: 1fr;
@@ -46,6 +72,7 @@ a:visited {
 .weekPlans li {
     margin: 5px;
 }
+
 
 .planSunday {
     grid-column: 1/2;
@@ -83,7 +110,16 @@ a:visited {
 }
 
 .planLi {
-    background-color: rgb(209, 201, 201);
+    background-color: #bebebe;
+}
+
+.planLi:hover {
+    background-color: rgb(102, 102, 102);
+}
+
+.planLi h4 {
+    font-size: 20px;
+    color: #fdf6e9;
 }
 
 /* plan.html specific */

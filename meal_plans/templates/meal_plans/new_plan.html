@@ -58,6 +58,8 @@
 
     
     document.addEventListener('DOMContentLoaded', function() {
+        // variable to hold id of current form being added as well as length of formset
+        let newFormCount = 0;
         document.getElementById("addItem").addEventListener("click", function () {
             // Sets the template of food form
             let templateForm = document.getElementById("foodItemTemplate").innerHTML;
@@ -68,9 +70,7 @@
             // Add the template to div
             newFoodFormDiv.innerHTML = templateForm;
 
-            // variable to hold id of current form being added as well as length of formset
-            newFormCount = 0;
-
+        
             // Grab each element of the form to alter attributes
             newFoodFormDiv.querySelectorAll("input, textarea, label").forEach(function (element) {
                 // Replace '__prefix__' with the new form count in id, for, and name attributes

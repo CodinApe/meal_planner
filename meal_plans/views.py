@@ -28,9 +28,23 @@ def plans(request):
     weekOne = Plan.objects.filter(date__range = [week1Start, week1End])
     weekTwo = Plan.objects.filter(date__range = [week2Start, week2End])
 
-    
+    weekDays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
 
-    context = {'plans': plans, 'today':today, 'weekOne':weekOne, 'weekTwo': weekTwo}
+    planExists2 = [None] * 7
+
+    for i in range(len(weekDays)):
+        for plan in weekTwo:
+            if weekDays[i] == plan.day_of_week:
+                planExists2[i] = plan
+
+    planExists1 = [None] * 7
+
+    for i in range(len(weekDays)):
+        for plan in weekOne:
+            if weekDays[i] == plan.day_of_week:
+                planExists1[i] = plan
+
+    context = {'plans': plans, 'today':today, 'weekOne':weekOne, 'weekTwo': weekTwo, 'weekDays': weekDays,'planExists1': planExists1, 'planExists2':  planExists2}
     return render(request, 'meal_plans/plans.html', context)
 
 def plan(request, plan_id):
