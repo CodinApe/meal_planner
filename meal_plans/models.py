@@ -38,7 +38,7 @@ class Plan(models.Model):
         return self.date.strftime('%A')
 
     def __str__(self):
-        return str(self.date)
+        return str(self.date.strftime("%B %d %Y"))
 
 class FoodItem(models.Model):
     """create foo item with fat, protein, and carb content"""
