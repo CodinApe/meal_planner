@@ -2,16 +2,23 @@
 {% load bootstrap5 %}
 
 {% block content %}
-<div class="jumbotron">
+
+<section id="loginSect">
     <h1>Don't eat that BON-BON, listen to your meal planner!</h1>
-</div>
+    <p><a>Login</a></p>
+    <p><a>Create Account</a></p>
+</section>
+
 {% if planToday %}
     {% for plan in planToday%}
-        <p>Hello</p>
-        <p>{{ plan.return_carbs }}</p>
+        <h3>Todays Plan - </h3>
+        <p>Total Calories: {{ plan.return_cals}}</p>
+        <p>Fat: {{ plan.return_fat}} </p>
+        <p>Carbohydrates: {{ plan.return_carbs }}</p>
+        <p>Protein: {{ plan.return_protein }}</p>
     {% endfor %}
+{% else %}
+<h3>No Plan Today - <a href="{% url 'meal_plans:new_plan' %}">Create Plan</a> </h3>
 {% endif %}
-
-
 
 {% endblock content %}

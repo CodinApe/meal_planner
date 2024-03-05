@@ -21,7 +21,7 @@
     <ul id="weekOnePlans" class="weekPlans">
         {% for plan in planExists1 %}
             {% if plan == None %}
-            <li class= "plan{{ day }} noPlan">
+            <li class= "noPlan">
                 No plan
             </li>
             {% elif today == plan.date %}
@@ -64,14 +64,14 @@
         <li>Thursday</li>
         <li>Friday</li>
         <li>Saturday</li>
-        {% for date in week1Dates%}
+        {% for date in week2Dates%}
         <li>{{ date }}</li>
         {% endfor %}
     </ul>
     <ul id="weekTwoPlans" class="weekPlans">
         {% for plan in planExists2 %}
         {% if plan == None %}
-        <li class= "plan{{ day }}">
+        <li class= "noPlan">
             No plan
         </li>
         {% else %}

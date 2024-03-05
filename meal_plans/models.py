@@ -25,6 +25,13 @@ class Plan(models.Model):
     @property
     def day_of_week(self):
         return self.date.strftime('%A')
+
+    def return_cals(self):
+        cals = 0
+        for item in self.fooditem_set.all():
+            if item.calories != None:
+                cals += item.calories
+        return cals
     
     def return_fat(self):
         fat = 0
@@ -53,6 +60,7 @@ class Plan(models.Model):
 class FoodItem(models.Model):
     """create foo item with fat, protein, and carb content"""
     item = models.TextField(blank=True)
+    calories = models.PositiveIntegerField(null=True, blank=True)
     fat = models.PositiveIntegerField(null=True, blank=True)
     protein = models.PositiveIntegerField(null=True, blank=True)
     carbohydrates = models.PositiveIntegerField(null=True, blank=True) 
