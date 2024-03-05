@@ -1,0 +1,6 @@
+<form action="{% url 'meal_plans:create_goal' %}" method="post">
+    {% csrf_token %}
+    {{form.as_p}}
+    <button name='submit'>Set Goal</button>
+
+</form>

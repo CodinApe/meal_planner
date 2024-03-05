@@ -1,6 +1,6 @@
 from typing import Iterable, Optional
 from django.db import models
-from django.core.exceptions import ValidationError
+from django.core.exceptions import ValidationError, ObjectDoesNotExist
 import datetime
 
 # Create your models here.
@@ -8,18 +8,7 @@ import datetime
 class Plan(models.Model):
     """create a plan for a certain day"""
     date = models.DateField()
-    """breakfast = models.TextField(default="") # original functionality before adding FoodItem class.
-    lunch = models.TextField(default="")
-    dinner = models.TextField(default="")
-    snacks = models.TextField(default="")"""
-
-    # current_date = datetime.date.today()
-    # the_day = current_date.weekday()
-    # week_days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
-    # current_day = week_days[the_day]
-
-    # allows user to delete item based on boolean
-    # delete_plan = False
+    # goal = models.ForeignKey(Goal, on_delete=models.CASCADE)
 
     def clean(self): 
         """Performs validation to data and inputs automatically, but this adds a 
@@ -36,6 +25,27 @@ class Plan(models.Model):
     @property
     def day_of_week(self):
         return self.date.strftime('%A')
+    
+    def return_fat(self):
+        fat = 0
+        for item in self.fooditem_set.all():
+            if item.fat != None:
+                fat += item.fat
+        return fat
+    
+    def return_protein(self):
+        protein = 0
+        for item in self.fooditem_set.all():
+            if item.protein != None:
+                protein+= item.protein 
+        return protein
+    
+    def return_carbs(self):
+        carbs = 0
+        for item in self.fooditem_set.all():
+            if item.carbohydrates != None:
+                carbs += item.carbohydrates
+        return carbs
 
     def __str__(self):
         return str(self.date.strftime("%B %d %Y"))
@@ -52,6 +62,36 @@ class FoodItem(models.Model):
     def __str__(self):
         return self.item    
     
+class Goal(models.Model):
+    """The goal the user creates to track their goals in meal planning/prep"""
+    name = "Goal"
+    calories = models.IntegerField(null=True, blank=True)
+    fat = models.IntegerField(null=True, blank=True)
+    protein = models.IntegerField(null=True, blank=True)
+    carbs = models.IntegerField(null=True, blank=True)
+
+    def __str__(self):
+        return self.cals, self.fat, self.protein, self.carbs
+    
+    def save(self, *args, **kwargs):
+        try:
+            # this will check if a goal exists, and then will allow to add its contents
+            existing = Goal.objects.get()
+            existing.name = self.name
+            existing.calories = self.calories
+            existing.protein = self.protein
+            existing.carbs = self.carbs
+            existing.fat = self.fat
+            existing.save()
+        except ObjectDoesNotExist:
+            # saves goal if none exists already
+            super(Goal, self).save(*args, **kwargs)
+    
+    def delete(self, *args, **kwargs):
+        # prevents deletion
+        pass
+
+
     
 
     

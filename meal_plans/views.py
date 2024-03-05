@@ -3,16 +3,20 @@ from django.forms import formset_factory
 from django.http import HttpResponse, JsonResponse
 import calendar
 from datetime import datetime, date, timedelta
+from django.core.exceptions import ObjectDoesNotExist
 
-from .models import Plan, FoodItem
+from .models import Plan, FoodItem, Goal
 
-from .forms import NewPlan, NewFoodItem
+from .forms import NewPlan, NewFoodItem, SetGoal
 
 # Create your views here.
 
 def index(request):
     """Home page for meal planner"""
-    return render(request, 'meal_plans/index.html')
+    today = datetime.now().date()
+    planToday = Plan.objects.filter(date=today)
+    context = {'planToday': planToday}
+    return render(request, 'meal_plans/index.html', context)
 
 def plans(request):
     """Show all the plans"""
@@ -66,6 +70,7 @@ def plans_for_date(request):
         formattedDate = datetime.strptime(selectedDate, "%m/%d/%Y").strftime("%Y-%m-%d")
         item = get_object_or_404(Plan, date = formattedDate)
     return render(request, 'meal_plans/plans_template.html', {'item':item})
+
 
 def new_plan(request):
     """Add a new plan for acertain day"""
@@ -136,5 +141,36 @@ def delete_plan(request, plan_id):
     context = {'plan': plan}
 
     return render(request, 'meal_plans/delete_plan.html', context)
+
+def goal(request):
+    """View current goal"""
+    try:
+        goal = Goal.objects.get()
+    except ObjectDoesNotExist:
+        goal = None
+
+    context = {'goal':goal}
+
+    return render(request, 'meal_plans/goal.html', context)
+
+def create_goal(request):
+    """Create a diet/meal goal"""
+    if request.method != 'POST':
+        form = SetGoal()
+    else:
+        form = SetGoal(request.POST)
+        if form.is_valid():
+            goal = form.save()
+            return redirect('meal_plans:goal')
+    
+    context = {
+        'form': form,
+    }
+    
+    return render(request, 'meal_plans/create_goal.html', context)
+
+# def edit_goal(request):
+#     """Edit diet/meal goal"""
+
 
     

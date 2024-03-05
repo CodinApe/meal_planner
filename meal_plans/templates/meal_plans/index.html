@@ -5,6 +5,12 @@
 <div class="jumbotron">
     <h1>Don't eat that BON-BON, listen to your meal planner!</h1>
 </div>
+{% if planToday %}
+    {% for plan in planToday%}
+        <p>Hello</p>
+        <p>{{ plan.return_carbs }}</p>
+    {% endfor %}
+{% endif %}
 
 
 

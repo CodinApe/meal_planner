@@ -22,4 +22,10 @@ urlpatterns = [
     path('delete_plan/<int:plan_id>/', views.delete_plan, name='delete_plan'),
 
     path('plans_for_date', views.plans_for_date, name='plans_for_date'),
+
+    path('goal', views.goal, name='goal'),
+
+    path('create_goal', views.create_goal, name='create_goal'), 
+    
+
 ]

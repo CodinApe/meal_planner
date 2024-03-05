@@ -3,7 +3,7 @@ from django.forms import formset_factory
 
 # from bootstrap_datepicker_plus.widgets import DatePickerInput
 
-from .models import Plan, FoodItem
+from .models import Plan, FoodItem, Goal
 
 
 class NewFoodItem(forms.ModelForm):
@@ -27,6 +27,12 @@ class NewPlan(forms.ModelForm):
 # Form to take a user input food item to scan the sqlite database and api call in views.py
 class SearchFoods(forms.Form):
     foodItem = forms.CharField(label="Search food items", max_length=80)
+
+
+class SetGoal(forms.ModelForm):
+    class Meta:
+        model = Goal
+        fields = ['calories', 'fat', 'protein', 'carbs']
         
 
         
