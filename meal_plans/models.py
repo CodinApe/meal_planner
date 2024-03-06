@@ -79,19 +79,23 @@ class Goal(models.Model):
     carbs = models.IntegerField(null=True, blank=True)
 
     def __str__(self):
-        return self.cals, self.fat, self.protein, self.carbs
-    
+        return self.name
+    # Delete once users is set up and implement - user= models.OneToOneField(User, models.on_delete=CASCADE)
     def save(self, *args, **kwargs):
-        try:
-            # this will check if a goal exists, and then will allow to add its contents
-            existing = Goal.objects.get()
-            existing.name = self.name
-            existing.calories = self.calories
-            existing.protein = self.protein
-            existing.carbs = self.carbs
-            existing.fat = self.fat
-            existing.save()
-        except ObjectDoesNotExist:
+        if Goal.objects.exists():
+            # If a goal exists, update its attributes
+            existing_goal = Goal.objects.first()
+            existing_goal.calories = self.calories
+            existing_goal.fat = self.fat
+            existing_goal.protein = self.protein
+            existing_goal.carbs = self.carbs
+            Goal.objects.filter(pk=existing_goal.pk).update(
+                calories=self.calories,
+                fat=self.fat,
+                protein=self.protein,
+                carbs=self.carbs
+            )
+        else:
             # saves goal if none exists already
             super(Goal, self).save(*args, **kwargs)
     

@@ -25,7 +25,7 @@ urlpatterns = [
 
     path('goal', views.goal, name='goal'),
 
-    path('create_goal', views.create_goal, name='create_goal'), 
+    path('create_goal/<int:goal_id>/', views.create_goal, name='create_goal'), 
     
 
 ]

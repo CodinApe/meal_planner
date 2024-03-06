@@ -18,18 +18,41 @@ h4 a, p a, div a {
 }
 
 /* index */
+h1 {
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-variant: small-caps;
+}
+
+h1 p {
+    font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+h1 .listy{
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 26px;
+}
+
+h1 .headerStandout {
+    font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-size: 50px;
+    font-variant: none;
+}
+
 #loginSect {
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-color: #f0f0f0;
+    background-color: white;
     padding: 20px;
     border: 1px solid #ccc;
     border-radius: 5px;
     text-align: center;
     z-index: 1000; /* Ensure it's above other content */
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+#loginSect p a {
+    font-size: 20px;
 }
 
 
@@ -76,16 +99,27 @@ li {
     
 }
 
+#weekOnePlans .noPlan, #weekTwoPlans .noPlan {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
 .weekPlans, .daysOfTheWeek {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
     grid-template-rows: 1fr;
     /* justify-content:left; */
     padding-left: 0;
+    overflow-x: scroll;
+    min-width: 400px;
+    
 }
 
 .weekPlans li {
     margin: 5px;
+    min-width: 180px;
 }
 
 

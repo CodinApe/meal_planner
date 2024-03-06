@@ -20,37 +20,40 @@
     </ul>
     <ul id="weekOnePlans" class="weekPlans">
         {% for plan in planExists1 %}
-            {% if plan == None %}
-            <li class= "noPlan">
-                No plan
-            </li>
-            {% elif today == plan.date %}
-                <li class= "plan{{ plan.day_of_week }}" id = "todayLi">
-                    <div class="planLi shadow p-3 mb-5 rounded" id="todayPlan">
-                        <a href="{% url 'meal_plans:plan' plan.id %}">
-                            <!-- <h4 class="fs-6">{{ plan.day_of_week }} </h4> -->
-                            {% comment %} <p>{{ plan }}</p></a> {% endcomment %}
-                            <p>carbohydrates: {{ plan.return_carbs }}</p>
-                            <p>protein: {{ plan.return_protein }}</p>
-                            <p>fat: {{ plan.return_fat }}</p>
-                        
-                        <p><a href="{% url 'meal_plans:delete_plan' plan.id %}">delete plan</a></p>
-                    </div>
-                </li>
+            {% if plan.date %}
+                {% if today == plan.date %}
+                    <li class= "plan{{ plan.day_of_week }}" id = "todayLi">
+                        <div class="planLi shadow p-3 rounded" id="todayPlan">
+                            <a href="{% url 'meal_plans:plan' plan.id %}">
+                                <!-- <h4 class="fs-6">{{ plan.day_of_week }} </h4> -->
+                                <!-- <p>{{ plan }}</p>  -->
+                                <p>carbohydrates: {{ plan.return_carbs }}</p>
+                                <p>protein: {{ plan.return_protein }}</p>
+                                <p>fat: {{ plan.return_fat }}</p>
+                            </a>
+                            <!-- <p><a href="{% url 'meal_plans:delete_plan' plan.id %}">delete plan</a></p> -->
+                        </div>
+                    </li>
+                {% else %}
+                    <li class= "plan{{ plan.day_of_week }}">
+                        <div class="planLi shadow p-3 rounded">
+                            <a href="{% url 'meal_plans:plan' plan.id %}">
+                                <!-- <h4 class="fs-6">{{ plan.day_of_week }} </h4> -->
+                                <!-- <p>{{ plan }}</p> -->
+                                <p>carbohydrates: {{ plan.return_carbs }}</p>
+                                <p>protein: {{ plan.return_protein }}</p>
+                                <p>fat: {{ plan.return_fat }}</p>
+                            </a> 
+                        </div>
+                    </li>
+                {% endif %}
             {% else %}
-            <li class= "plan{{ plan.day_of_week }}">
-                <div class="planLi shadow p-3 mb-5 rounded">
-                    <a href="{% url 'meal_plans:plan' plan.id %}">
-                        <!-- <h4 class="fs-6">{{ plan.day_of_week }} </h4> -->
-                        {% comment %} <p>{{ plan }}</p></a> {% endcomment %}
-                        <p>carbohydrates: {{ plan.return_carbs }}</p>
-                        <p>protein: {{ plan.return_protein }}</p>
-                        <p>fat: {{ plan.return_fat }}</p>
-                    
-                    <p><a href="{% url 'meal_plans:delete_plan' plan.id %}">delete plan</a></p>
-                </div>
-            </li>
+                <li class="noPlan">
+                    <p>no plan</p>
+                    <a href="{% url 'meal_plans:new_plan' %}?date={{ plan }}">Add Plan</a>
+                </li>
             {% endif %}
+
         {% endfor %}
 
     </ul>
@@ -70,23 +73,25 @@
     </ul>
     <ul id="weekTwoPlans" class="weekPlans">
         {% for plan in planExists2 %}
-        {% if plan == None %}
-        <li class= "noPlan">
-            No plan
-        </li>
+        {% if plan.date %}
+                <li class= "plan{{ plan.day_of_week }}">
+                    <div class="planLi shadow p-3 rounded">
+                        <a href="{% url 'meal_plans:plan' plan.id %}">
+                            <!-- <h4 class="fs-6">{{ plan.day_of_week }} </h4> -->
+                            <!-- <p>{{ plan }}</p> -->
+                            <p>carbohydrates: {{ plan.return_carbs }}</p>
+                            <p>protein: {{ plan.return_protein }}</p>
+                            <p>fat: {{ plan.return_fat }}</p>
+                        </a> 
+                    </div>
+                </li>
         {% else %}
-        <li class= "plan{{ plan.day_of_week }}">
-            <div class="planLi shadow p-3 mb-5 rounded">
-                <a href="{% url 'meal_plans:plan' plan.id %}">
-                <!-- <h4 class="fs-6">{{ plan.day_of_week }} </h4> -->
-                {% comment %} <p>{{ plan }}</p></a> {% endcomment %}
-                <p>carbohydrates: {{ plan.return_carbs }}</p>
-                <p>protein: {{ plan.return_protein }}</p>
-                <p>fat: {{ plan.return_fat }}</p>
-                <p><a href="{% url 'meal_plans:delete_plan' plan.id %}">delete plan</a></p>
-            </div>
-        </li>
+            <li class="noPlan">
+                <p >no plan</p>
+                <a href="{% url 'meal_plans:new_plan' %}?date={{ plan }}">Add Plan</a>
+            </li>
         {% endif %}
+
     {% endfor %}
     </ul>   
 
