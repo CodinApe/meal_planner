@@ -55,6 +55,7 @@ h4 a, p a, div a {
 }
 
 /* index */
+<<<<<<< HEAD
 #loginSect h1 {
     font-family:'Courier New', Courier, monospace;
     font-size: 34px;
@@ -70,22 +71,36 @@ h4 a, p a, div a {
     font-weight: 650;
     font-family:'Courier New', Courier, monospace;
     margin-top: 25px;
+=======
+h1 {
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-variant: small-caps;
+>>>>>>> db563b0557ed753f50de6e961af1d1c3801e0da2
 }
 
 h1 p {
     font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
 }
+<<<<<<< HEAD
 
 h1 .listy{
     font-family: 'Courier New', Courier, monospace;
     font-size: 20px;
+=======
+h1 .listy{
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 26px;
+>>>>>>> db563b0557ed753f50de6e961af1d1c3801e0da2
 }
 
 h1 .headerStandout {
     font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     font-size: 50px;
     font-variant: none;
+<<<<<<< HEAD
     text-decoration: underline;
+=======
+>>>>>>> db563b0557ed753f50de6e961af1d1c3801e0da2
 }
 
 #loginSect {
@@ -95,7 +110,11 @@ h1 .headerStandout {
     width: 580px;
     transform: translate(-50%, -50%);
     background-color: white;
+<<<<<<< HEAD
     padding: 40px;
+=======
+    padding: 20px;
+>>>>>>> db563b0557ed753f50de6e961af1d1c3801e0da2
     border: 1px solid #ccc;
     border-radius: 5px;
     text-align: center;
@@ -150,11 +169,14 @@ li {
     
 }
 
+<<<<<<< HEAD
 .scroll {
     overflow-x: scroll;
     min-width: 400px;
 }
 
+=======
+>>>>>>> db563b0557ed753f50de6e961af1d1c3801e0da2
 #weekOnePlans .noPlan, #weekTwoPlans .noPlan {
     display: flex;
     flex-direction: column;
@@ -168,6 +190,9 @@ li {
     grid-template-rows: 1fr;
     gap: 10px;
     padding-left: 0;
+    overflow-x: scroll;
+    min-width: 400px;
+    
 }
 
 .plansWeekItem {
@@ -183,7 +208,11 @@ li {
 
 .weekPlans li {
     margin: 5px;
+<<<<<<< HEAD
     min-width: 150px;
+=======
+    min-width: 180px;
+>>>>>>> db563b0557ed753f50de6e961af1d1c3801e0da2
 }
 
 

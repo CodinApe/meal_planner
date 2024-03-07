@@ -1,6 +1,9 @@
+<<<<<<< HEAD
 {% extends 'meal_plans/base.html' %}
 
 {% block content %}
+=======
+>>>>>>> db563b0557ed753f50de6e961af1d1c3801e0da2
 <form action="{% url 'meal_plans:create_goal' goal_id %}" method="post">
     {% csrf_token %}
     {{form.as_p}}

@@ -9,17 +9,19 @@
     {{ formset.empty_form.as_table }}
 </div>
 
+<h2>New Plan- good for you;)</h2>
 <form action="{% url 'meal_plans:new_plan'%}" method="post">
     {% csrf_token %}
     {{ form.as_p }}
-    <p>Select a food item</p>
-    <input id="myInput" type="text" placeholder="Search..">
-    <input id = "submitCheck" type="button">Search</input>
+    <p>Select food items</p>
     <select id="select" name="food_item" class="foodSelectSec" multiple>
         {% for food_item in food_items %}
             <option value="{{ food_item.id }}">{{ food_item.item }}</option>
         {% endfor %}
     </select>
+    <!-- <input id="myInput" type="text" placeholder="Search..">
+    <input id = "submitCheck" type="button">Search</input> -->
+    
     {{ formset.management_form }}
     <div id="foodItemContainer" class = "form-group">
     {% for food_form in formset %}
