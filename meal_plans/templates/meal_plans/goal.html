@@ -10,6 +10,6 @@
     <p>Protein: {{ goal.protein }}</p>
     <p>Fat: {{ goal.fat }}</p>
 
-    <p><a href="{% url 'meal_plans:edit_plan' %}">Edit Goal<a/></p>
+    <p><a href="{% url 'meal_plans:create_goal' goal_id=goal.id %}">Edit Goal<a/></p>
 {% endif %}
 {% endblock %}

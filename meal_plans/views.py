@@ -48,6 +48,9 @@ def plans(request):
         for plan in weekOne:
             if weekDays[i] == plan.day_of_week:
                 planExists1[i] = plan
+    for i in range(7):
+        if planExists1[i] is None:
+            planExists1[i] = week1Dates[i]
 
     planExists2 = [None] * 7
 
@@ -55,6 +58,9 @@ def plans(request):
         for plan in weekTwo:
             if weekDays[i] == plan.day_of_week:
                 planExists2[i] = plan
+    for i in range(7):
+        if planExists2[i] is None:
+            planExists2[i] = week2Dates[i]
 
     context = {'plans': plans, 'today':today, 'weekOne':weekOne, 'weekTwo': weekTwo, 'weekDays': weekDays,'planExists1': planExists1, 'planExists2':  planExists2, 'week1Dates':week1Dates, 'week2Dates':week2Dates}
     return render(request, 'meal_plans/plans.html', context)
@@ -156,24 +162,29 @@ def goal(request):
 
     return render(request, 'meal_plans/goal.html', context)
 
-def create_goal(request):
-    """Create a diet/meal goal"""
-    if request.method != 'POST':
-        form = SetGoal()
+def create_goal(request, goal_id=None):
+    """Create or edit a diet/meal goal"""
+
+    if goal_id:
+        goal = get_object_or_404(Goal, id=goal_id)
     else:
-        form = SetGoal(request.POST)
+        goal = None
+
+    if request.method != 'POST':
+        form = SetGoal(instance=goal) if goal else SetGoal()
+    else:
+        form = SetGoal(request.POST, instance=goal)
         if form.is_valid():
             goal = form.save()
             return redirect('meal_plans:goal')
     
     context = {
         'form': form,
+        'goal_id': goal_id,
     }
     
     return render(request, 'meal_plans/create_goal.html', context)
 
-# def edit_goal(request):
-#     """Edit diet/meal goal"""
 
 
     
