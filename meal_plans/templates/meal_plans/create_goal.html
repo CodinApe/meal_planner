@@ -1,6 +1,11 @@
+{% extends 'meal_plans/base.html' %}
+
+{% block content %}
 <form action="{% url 'meal_plans:create_goal' goal_id %}" method="post">
     {% csrf_token %}
     {{form.as_p}}
     <button name='submit'>Set Goal</button>
 
 </form>
+
+{% endblock %}

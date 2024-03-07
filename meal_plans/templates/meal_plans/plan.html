@@ -7,11 +7,15 @@
 
 <section id="foodItems">
     {% for fooditem in fooditems %}
-    <section id ="">
+    <section id ="foodGrid">
         {{ fooditem }}
+        {{ fooditem.calories}}
+        {{fooditem.carbohydrates}}
     </section>
     {% endfor%}
 </section>
+
+{% comment %} Change the view, so that the num of items is counted and sent to this pae, then set the {% endcomment %}
 
      
 

@@ -28,12 +28,14 @@
     {% bootstrap_css %}
 </head>
 <body id="body">
+    {% block title %}
     <ul class = "nav ">
         <li class="nav-item"><a class="nav-link" href="{% url 'meal_plans:index' %}" >Meal Planner</a></li> 
         <li class="nav-item"><a class="nav-link" href="{% url 'meal_plans:plans' %}">Plans</a></li>
         <li class="nav-item"><a class="nav-link" href="{% url 'meal_plans:goal' %}">Goal</a></li>
         <li class="nav-item"><a class="nav-link">Your Food</a></li>
     </ul>
+    {% endblock %}
     <div >
         {% block content %}{% endblock content %}
     </div>
