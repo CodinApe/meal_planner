@@ -23,6 +23,8 @@ urlpatterns = [
 
     path('plans_for_date', views.plans_for_date, name='plans_for_date'),
 
+    path('food_items', views.food_items, name='food_items'),
+
     path('goal', views.goal, name='goal'),
 
     path('create_goal/<int:goal_id>/', views.create_goal, name='create_goal'), 

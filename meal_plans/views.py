@@ -86,7 +86,6 @@ def new_plan(request):
     FooditemFormset = formset_factory(NewFoodItem, extra=0)
     food_items = FoodItem.objects.all()
 
-
     if request.method != 'POST':
         # no data submitted; create blank form
         form = NewPlan()
@@ -150,6 +149,14 @@ def delete_plan(request, plan_id):
     context = {'plan': plan}
 
     return render(request, 'meal_plans/delete_plan.html', context)
+
+def food_items(request):
+    """dislpays all food items, which can then be selected and seen individually"""
+    fooditems = FoodItem.objects.all()
+
+    context = {'food_items':fooditems}
+    
+    return render(request, 'meal_plans/food_items.html', context)
 
 def goal(request):
     """View current goal"""

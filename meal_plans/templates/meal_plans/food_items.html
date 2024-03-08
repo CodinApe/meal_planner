@@ -1,0 +1,10 @@
+{% extends 'meal_plans/base.html' %}
+
+{% block content %}
+<ul>
+    {% for fooditem in food_items %}
+    <li>{{ fooditem.item }}</li>
+    {% endfor %}
+</ul>
+
+{% endblock %}
