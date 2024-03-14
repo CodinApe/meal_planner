@@ -4,6 +4,7 @@
 {% if goal == None%}
     <a href="{% url 'meal_plans:create_goal' %}">Add Goal</a>
 {% else %} 
+<section id="goalSection">
     <h2>{{ goal.name }}</h2>
     <p>Calories: {{ goal.calories }}</p>
     <p>Carbohydrates: {{ goal.carbs }} </p>
@@ -11,5 +12,7 @@
     <p>Fat: {{ goal.fat }}</p>
 
     <p><a href="{% url 'meal_plans:create_goal' goal_id=goal.id %}">Edit Goal<a/></p>
+</section>
+    
 {% endif %}
 {% endblock %}

@@ -1,22 +1,25 @@
 html {
-    background-color: #F0F0F0;
+    background-color:  #616161;
 }
 #body {
-    background-color: #F0F0F0;
-    background-image: linear-gradient(orange, #F0F0F0);
+    background-color:  #616161;
+    /* background-image: linear-gradient(orange, #F0F0F0); */
     margin: 0 auto;
     text-align: center;
     justify-content: center; 
 }
 
 .nav {
-    background-color: orange;
-    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    box-shadow: 3px 3px 30px orange;
+    height: 45px;
+    background-color:  #50C878 ;
+    color: white;
+    box-shadow: 2px 2px 30px black;
 }
 .nav li a{
-    color: rgb(0, 0, 0);
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    color: rgb(27, 27, 27);
 }
+
 h4 a, p a, div a {
     color: black;
     text-decoration: none;
@@ -26,7 +29,7 @@ h4 a, p a, div a {
 /* Credit to Chris Smith at https://codepen.io/chris22smith/pen/RZogMa */
 .bg {
     animation:slide 3s ease-in-out infinite alternate;
-    background-image: linear-gradient(-60deg, rgb(239, 155, 0) 50%, rgb(255, 255, 255) 50%);
+    background-image: linear-gradient(-60deg,  #50C878 50%, rgb(255, 255, 255) 50%);
     bottom:0;
     left:-50%;
     opacity:.5;
@@ -127,48 +130,45 @@ li {
 }
 
 /* plans.html */
-#plansSection h2 {
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+#plansSection h2, #goalSection h2, #foodSection h2, #planSection h2 {
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     font-size: 28px;
     margin: 15px auto 30px auto;
+    color: #50C878;
 }
 
 .h3Plans {
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     text-align: left;
     font-size: 20px;
+    color: #F0F0F0;
 }
 
 #weekOnePlans {
     list-style: none;
 }
 
-#plansSection {
+#plansSection,#goalSection, #foodSection, #planSection {
     margin: 0 auto;
     padding: 20px;
     text-align: center;
     justify-content: center;
-    background-color: #F0F0F0;
+    /* background-color: #F0F0F0; */
     max-width: 1240px;
-    border-radius: 10px;
 }
 
 #todayPlan {
-    /* background-color: rgb(245, 162, 162); */
-    background-color: #7CB342;
+    background-color: #50C878;
 }
 
 #todayPlan:hover {
-    background-color: #f8e8e8;
+    background-color: #8ee4ab
 }
 
-#todayLi {
-    
-}
 
 .scroll {
     overflow-x: scroll;
-    min-width: 400px;
+    /* min-width: 400px; */
 }
 
 #weekOnePlans .noPlan, #weekTwoPlans .noPlan {
@@ -179,7 +179,7 @@ li {
 }
 
 .noPlan {
-    background-color: #bebebe;
+    background-color:#bebebe;
     text-align: center;
     max-height: 150px;
     line-height: 6px;
@@ -187,7 +187,7 @@ li {
 }
 
 .noPlan:hover {
-    background-color: rgb(102, 102, 102);
+    background-color: rgb(189, 186, 186);
 }
 
 .noPlan {
@@ -200,7 +200,8 @@ li {
     grid-template-columns: repeat(7, 160px);
     grid-template-rows: 1fr;
     gap: 10px;
-    padding-left: 0;
+    padding-left: 5px;
+    padding-right: 10px;
     
 }
 
@@ -208,6 +209,7 @@ li {
     font-size: 16px;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     margin-bottom: 0px;
+    color: #F0F0F0;
 }
 
 .weekPlans .date {
@@ -215,6 +217,7 @@ li {
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     margin-top: -8px;
     font-style: oblique;
+    color: #F0F0F0;
 }
 
 .plansWeekItem {
@@ -234,10 +237,11 @@ li {
     max-height: 150px;
     line-height: 6px;
     min-width: 150px;
+    min-height: 120px;
 }
 
 .planLi:hover {
-    background-color: rgb(102, 102, 102);
+    background-color:#fdf6e9;
 }
 
 .planLi h4 {
@@ -262,11 +266,55 @@ div #macrosH4 {
     margin-top: 30px;
     padding: 6px;
     background-color: #F0F0F0;
-    border: 1px solid rgb(252, 181, 131);
-    box-shadow: 1px 1px orange;
+    border: 1px solid #50C878;
+    box-shadow: 1px 1px #50C878;
     width: 100px;
 
 }
+
+/* Scrollbar */
+/* Custom scrollbar */
+/* For Firefox */
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #70706d;
+  }
+  
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #cfcfce;
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #50C878;
+  }
+  
+  /* For Webkit (Chrome, Safari, etc.) */
+  /* width */
+  ::-moz-scrollbar {
+    width: 10px;
+  }
+  
+  /* Track */
+  ::-moz-scrollbar-track {
+    background: #f1f1f1;
+  }
+  
+  /* Handle */
+  ::-moz-scrollbar-thumb {
+    background: #888;
+  }
+  
+  /* Handle on hover */
+  ::-moz-scrollbar-thumb:hover {
+    background: #555;
+  }
 /* plan.html specific */
 
 #foodItems {
@@ -279,4 +327,32 @@ div #macrosH4 {
 
 #container .items {
     display: none;
+}
+
+/* fooItems */
+#accordion {
+    margin: 0 auto;
+    width: 50%;
+    min-width: 400px;
+    max-width: 800px;
+}
+#accordion h3 {
+    /* background-color: #ffffff; */
+    border: #50C878;
+}
+
+#accordion h3:hover {
+    color: black;
+}
+
+#accordion .ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active, a.ui-button:active, .ui-button:active, .ui-button.ui-state-active:hover {
+    color: black;
+    background-color: #50C878;
+}
+
+@media screen and (min-width: 1250px) {
+    .scroll {
+        overflow-x:hidden;
+        /* min-width: 400px; */
+    }
 }

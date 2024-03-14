@@ -17,11 +17,11 @@
 
 {% if planToday %}
     {% for plan in planToday%}
-        <h3>Todays Plan - </h3>
+        <!-- <h3>Todays Plan - </h3>
         <p>Total Calories: {{ plan.return_cals}}</p>
         <p>Fat: {{ plan.return_fat}} </p>
         <p>Carbohydrates: {{ plan.return_carbs }}</p>
-        <p>Protein: {{ plan.return_protein }}</p>
+        <p>Protein: {{ plan.return_protein }}</p> -->
     {% endfor %}
 {% else %}
 {% comment %} <h3>No Plan Today - <a href="{% url 'meal_plans:new_plan' %}">Create Plan</a> </h3> {% endcomment %}

@@ -37,8 +37,8 @@
                             </div>
                         </li>
                     {% else %}
-                        <li class= "plan{{ plan.day_of_week }} plansWeekItem">
-                            <div class="planLi shadow p-3 rounded">
+                        <li class= "plan{{ plan.day_of_week }} ">
+                            <div class="planLi shadow p-3 rounded plansWeekItem">
                                 <a href="{% url 'meal_plans:plan' plan.id %}">
                                     <h4 id="macrosH4">Macros:</h4>
                                     <!-- <h4 class="fs-6">{{ plan.day_of_week }} </h4> -->
@@ -51,7 +51,7 @@
                         </li>
                     {% endif %}
                 {% else %}
-                    <li class="noPlan plansWeekItem rounded">
+                    <li class="planLi plansWeekItem rounded">
                         <a href="{% url 'meal_plans:new_plan' %}?date={{ plan }}">
                         <p>no plan</p>
                         <p>Add Plan</p></a>
@@ -65,15 +65,15 @@
     <h3 class="h3Plans">Next Week</h3>
     <div class="scroll">
         <ul class="weekPlans">
-            <li>Sunday</li>
-            <li>Monday</li>
-            <li>Tuesday</li>
-            <li>Wednesday</li>
-            <li>Thursday</li>
-            <li>Friday</li>
-            <li>Saturday</li>
+            <li class="day">Sunday</li>
+            <li class="day">Monday</li>
+            <li class="day">Tuesday</li>
+            <li class="day">Wednesday</li>
+            <li class="day">Thursday</li>
+            <li class="day">Friday</li>
+            <li class="day">Saturday</li>
             {% for date in week2Dates%}
-            <li>{{ date }}</li>
+            <li class="date">{{ date }}</li>
             {% endfor %}
         </ul>
         <ul id="weekTwoPlans" class="weekPlans">
@@ -92,7 +92,7 @@
                         </div>
                     </li>
             {% else %}
-                <li class="noPlan plansWeekItem rounded">
+                <li class="planLi plansWeekItem rounded">
                     <a href="{% url 'meal_plans:new_plan' %}?date={{ plan }}">
                     <p>no plan</p>
                     <p>Add Plan</p></a>

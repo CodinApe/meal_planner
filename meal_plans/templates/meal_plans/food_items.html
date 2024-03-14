@@ -1,9 +1,34 @@
 {% extends 'meal_plans/base.html' %}
 
 {% block content %}
-<ul>
+<script>
+    $( function() {
+    var icons = {
+      header: "ui-icon-circle-arrow-e",
+      activeHeader: "ui-icon-circle-arrow-s"
+    };
+    $( "#accordion" ).accordion({
+      icons: icons
+    });
+    $( "#toggle" ).button().on( "click", function() {
+      if ( $( "#accordion" ).accordion( "option", "icons" ) ) {
+        $( "#accordion" ).accordion( "option", "icons", null );
+      } else {
+        $( "#accordion" ).accordion( "option", "icons", icons );
+      }
+    });
+  } );
+    </script>
+
+<h2>Your Food Items</h2>
+<ul id="accordion">
     {% for fooditem in food_items %}
-    <li>{{ fooditem.item }}</li>
+    <li>
+        <h3>{{ fooditem.item }} </h3>
+        <div>
+            <p>carbs: {{ fooditem.carbohydrates }}<br>protein: {{ fooditem.protein }}<br>fat: {{ fooditem.fat }}</p>
+        </div>
+    </li>
     {% endfor %}
 </ul>
 
