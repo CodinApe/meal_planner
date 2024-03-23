@@ -3,7 +3,7 @@
 
 {% block content %}
 <section id="plansSection">
-    <h2>Your Meal Plans!</h2>
+    <h2>Your Plans</h2>
 
     <h3 class="h3Plans">Current week</h3>
     <div class="scroll">
@@ -104,6 +104,25 @@
     </div>
     <p class="button"><a href="{% url 'meal_plans:new_plan' %}">Add plan</a></p>
 
-</section>
+
+    {% if goal == None%}
+    <a href="{% url 'meal_plans:create_goal' %}">Add Goal</a>
+    {% else %} 
+    <section id="goalSection">
+        <h2>Your Goal</h2>
+        <section id="goalMacros">
+            <p>Calories: {{ goal.calories }}</p>
+            <p>Carbohydrates: {{ goal.carbs }} </p>
+            <p>Protein: {{ goal.protein }}</p>
+            <p>Fat: {{ goal.fat }}</p>
+            <p><a href="{% url 'meal_plans:create_goal' goal_id=goal.id %}">Edit Goal<a/></p>
+        </section>
+        
+
+        
+    </section>
+        
+    {% endif %}
+    </section>
 
 {% endblock content %}

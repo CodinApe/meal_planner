@@ -19,17 +19,19 @@
     });
   } );
     </script>
+<section id="foodSection">
+  <h2>Your Food Items</h2>
+  <ul id="accordion">
+      {% for fooditem in food_items %}
+      <li>
+          <h3>{{ fooditem.item }} </h3>
+          <div>
+              <p>carbs: {{ fooditem.carbohydrates }}<br>protein: {{ fooditem.protein }}<br>fat: {{ fooditem.fat }}</p>
+          </div>
+      </li>
+      {% endfor %}
+  </ul>
+</section>
 
-<h2>Your Food Items</h2>
-<ul id="accordion">
-    {% for fooditem in food_items %}
-    <li>
-        <h3>{{ fooditem.item }} </h3>
-        <div>
-            <p>carbs: {{ fooditem.carbohydrates }}<br>protein: {{ fooditem.protein }}<br>fat: {{ fooditem.fat }}</p>
-        </div>
-    </li>
-    {% endfor %}
-</ul>
 
 {% endblock %}

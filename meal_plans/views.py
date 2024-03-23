@@ -20,6 +20,11 @@ def index(request):
 
 def plans(request):
     """Show all the plans"""
+    try:
+        goal = Goal.objects.get()
+    except ObjectDoesNotExist:
+        goal = None
+
     plans = Plan.objects.order_by('date')
     today = date.today()
     todaysDate = datetime.now().date()
@@ -62,7 +67,7 @@ def plans(request):
         if planExists2[i] is None:
             planExists2[i] = week2Dates[i]
 
-    context = {'plans': plans, 'today':today, 'weekOne':weekOne, 'weekTwo': weekTwo, 'weekDays': weekDays,'planExists1': planExists1, 'planExists2':  planExists2, 'week1Dates':week1Dates, 'week2Dates':week2Dates}
+    context = {'plans': plans, 'today':today, 'weekOne':weekOne, 'weekTwo': weekTwo, 'weekDays': weekDays,'planExists1': planExists1, 'planExists2':  planExists2, 'week1Dates':week1Dates, 'week2Dates':week2Dates, 'goal': goal}
     return render(request, 'meal_plans/plans.html', context)
 
 def plan(request, plan_id):

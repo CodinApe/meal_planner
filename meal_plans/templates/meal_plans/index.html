@@ -1,20 +1,36 @@
 {% extends "meal_plans/base.html" %}
 {% load bootstrap5 %}
+{% load static %}
 
 {%block title%}
 {% endblock %}
 {% block content %}
 <section id="animatedBG">
 
-<div class="bg"></div>
+<!-- <div class="bg"></div>
 <div class="bg bg2"></div>
 <div class="bg bg3"></div>
 <section id="loginSect">
     <h1 class=".h1"><div class="headerStandout">DON'T EAT THAT CUPCAKE</div><br>listen to your<br><div class="mealPlanner">Meal Planner</div></h1>
     <p><a>Login</a></p>
     <p><a>Create Account</a></p>
-</section>
+</section> -->
+<section id="title">
+    <div class="hero-banner">
+        <div class="hero-banner__title" aria-hidden="true">Dont Eat that Cupcake!</div>
+        <img class="hero-banner__image" src="{% static 'meal_plans\jennie-brown-MKBoRZEGeiM-unsplash.jpg'%}"/> <!--Photo by <a href="https://unsplash.com/@fabellastudios?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Jennie Brown</a> on <a href="https://unsplash.com/photos/three-cupcakes-on-white-wood-MKBoRZEGeiM?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
+        -->
+        <h1 class="hero-banner__title hero-banner__stroked-title">Dont Eat that Cupcake!
+    
+        </h1>
+    </div>
 
+    <section class="content">
+        <p>GOOD Decision. Moderation is key;)</p>
+        <a>Login</a>
+        <a>Signup</a>
+    </section>
+</section>
 {% if planToday %}
     {% for plan in planToday%}
         <!-- <h3>Todays Plan - </h3>
