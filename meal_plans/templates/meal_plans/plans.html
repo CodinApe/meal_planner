@@ -2,8 +2,22 @@
 {% load static %}
 
 {% block content %}
+<section id="todaysSection">
+    <h2>Todays Plan</h2>
+    {% if todayPlan == None %}
+        <h3><a>No plan for today....Add a plan!</a></h3>
+    {% else %}
+        <p>{{ todayPlan.return_carbs }}</p>
+        <p>{% for fooditem in food_items %}</p>
+            <p>{{fooditem}}: {{fooditem.calories}} {{fooditem.carbohydrates}}</p>
+            {% endfor %}
+
+    {% endif %}
+
+</section>
+
 <section id="plansSection">
-    <h2>Your Plans</h2>
+    <h2>Your Meal Plans</h2>
 
     <h3 class="h3Plans">Current week</h3>
     <div class="scroll">

@@ -2,7 +2,7 @@
 
 .nav {
     height: 45px;
-    background-color:  #FFA500 ;
+    background-color:  #ffbb33 ;
     color: white;
     /* box-shadow: 2px 2px 5px #FFA500; */
     display: grid;
@@ -13,7 +13,7 @@
 }
 .nav li a{
     font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    color: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
 }
 
 h4 a, p a, div a {
@@ -178,7 +178,7 @@ li {
 }
 
 /* plans.html */
-#plansSection h2, #goalSection h2, #foodSection h2, #planSection h2 {
+#plansSection h2, #goalSection h2, #foodSection h2, #planSection h2, #todaysSection h2 {
     font-family: 'Signika', Arial, sans-serif;
     font-size: 28px;
     margin: 15px auto 30px auto;
@@ -196,19 +196,30 @@ li {
     list-style: none;
 }
 
-#plansSection,#goalSection, #foodSection, #planSection {
+#plansSection,#goalSection, #foodSection, #planSection, #newPlanSection {
     margin: 0 auto;
     padding: 20px;
     text-align: center;
     justify-content: center;
-    background-color: #222222;
+    background-color: #352f2f;
     max-width: 1240px;
-    height: 100vh;
+    /* height: 100vh; */
     min-height: 800px;
 }
 
+#todaysSection {
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+    justify-content: center;
+    background-color: #352f2f;
+    max-width: 1240px;
+    /* height: 100vh; */
+    min-height: 200px;
+}
+
 #todayPlan {
-    background-color: #FFA500;
+    background-color: #ffbb33;
 }
 
 #todayPlan:hover {

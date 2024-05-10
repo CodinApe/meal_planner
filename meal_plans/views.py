@@ -29,6 +29,16 @@ def plans(request):
     today = date.today()
     todaysDate = datetime.now().date()
 
+    try:
+        todayPlan = Plan.objects.get(date=todaysDate)
+        food_items = todayPlan.fooditem_set.all()
+        
+    except Plan.DoesNotExist:
+        todayPlan = None
+        food_items = None
+
+
+
     week1Start = todaysDate - timedelta(days=todaysDate.weekday() + 1)
     week1End = week1Start + timedelta(days=6)
     week2Start = week1End + timedelta(days=1)
@@ -67,7 +77,8 @@ def plans(request):
         if planExists2[i] is None:
             planExists2[i] = week2Dates[i]
 
-    context = {'plans': plans, 'today':today, 'weekOne':weekOne, 'weekTwo': weekTwo, 'weekDays': weekDays,'planExists1': planExists1, 'planExists2':  planExists2, 'week1Dates':week1Dates, 'week2Dates':week2Dates, 'goal': goal}
+    context = {'plans': plans, 'today':today, 'weekOne':weekOne, 'weekTwo': weekTwo, 'weekDays': weekDays,'planExists1': planExists1, 'planExists2':  planExists2, 'week1Dates':week1Dates, 'week2Dates':week2Dates, 'goal': goal, 
+    'todayPlan': todayPlan, 'food_items':food_items}
     return render(request, 'meal_plans/plans.html', context)
 
 def plan(request, plan_id):
@@ -104,10 +115,13 @@ def new_plan(request):
         if form.is_valid():
             plan = form.save()
             # Handles grabbign the selcted food from the dropdown of food_items
-            food_item_ids = request.POST.getlist('food_item')
+            food_item_ids = request.POST.getlist('selectedIds')
             if food_item_ids:
+                food_item_ids = ','.join(food_item_ids)
+
+                food_item_ids = food_item_ids.split(',')
                 for food_id in food_item_ids:
-                    foodItem = FoodItem.objects.get(id = food_id)
+                    foodItem = FoodItem.objects.get(id = int(food_id))
                     plan.fooditem_set.add(foodItem)
 
             # Handles the forms for new food items saved to database and plan

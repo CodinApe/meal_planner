@@ -8,17 +8,19 @@
 <div id="foodItemTemplate" style="display: none;">
     {{ formset.empty_form.as_table }}
 </div>
-
-<h2>New Plan- good for you;)</h2>
+<section id="newPlanSection">
+    <h2>New Plan- good for you;)</h2>
 <form action="{% url 'meal_plans:new_plan'%}" method="post">
     {% csrf_token %}
     {{ form.as_p }}
     <p>Select food items</p>
-    <select id="select" name="food_item" class="foodSelectSec" multiple>
+    <div name="food_item" >
         {% for food_item in food_items %}
-            <option value="{{ food_item.id }}">{{ food_item.item }}</option>
+            <div class="foodItem" data-id="{{ food_item.id }}">{{ food_item.item }}</div>
         {% endfor %}
-    </select>
+    </div>
+    <div id="selectedDisplay"></div>
+    <input type="hidden" id="selectedIds" name="selectedIds">
     <!-- <input id="myInput" type="text" placeholder="Search..">
     <input id = "submitCheck" type="button">Search</input> -->
     
@@ -40,6 +42,8 @@
         <p class="items">{{ food_item }}</p>
     {% endfor %}
 </div>
+</section>
+
 
 <style>
     #container .items {
@@ -55,7 +59,16 @@
     {% comment %} Adds select2 js function to select allowing selection of multiple items {% endcomment %}
 
     $(document).ready(function() {
-        $(".foodSelectSec").select2();
+        let selected = [];
+        $(".foodItem").on('click', function() {
+            let itemId = $(this).data('id');
+            let itemName = $(this).text();
+
+            selected.push(itemId);
+
+            $("#selectedDisplay").append('<div>' + itemName + '</div>');
+            $("#selectedIds").val(selected.join(','));
+        })
     });
 
     

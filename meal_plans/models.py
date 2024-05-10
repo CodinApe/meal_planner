@@ -101,16 +101,4 @@ class Goal(models.Model):
     
     def delete(self, *args, **kwargs):
         # prevents deletion
-        pass
-
-
-    
-
-    
-    
-
-
-
-    
-
-    
+        pass   
